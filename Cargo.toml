@@ -1,0 +1,15 @@
+[package]
+name = "faster-whisper-rs"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Creative Coders <officialccoders@gmail.com>"]
+description = "High-level rust bindings to the faster-whisper python api."
+homepage = "https://github.com/CodersCreative/faster-whisper-rs"
+readme = "README.md"
+publish = true
+keywords = ["speech_to_text", "open-ai", "whisper", "faster", "stt"]
+categories = ["science", "api-bindings"]
+
+[dependencies]
+pyo3 = {version="0.21.2", features=["auto-initialize"]}
