@@ -21,7 +21,7 @@ use faster-whisper-rs::WhisperModel;
 
 fn main() -> Result<(), Box<dyn Error>>{
     let fw = WhisperModel::default();
-    let transcript = fw.transcribe(false, "Path to file".to_string())?;
+    let transcript = fw.transcribe("Path to file".to_string())?;
 
     println!("{}", transcript);
 

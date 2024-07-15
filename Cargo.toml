@@ -12,4 +12,5 @@ keywords = ["speech_to_text", "open-ai", "whisper", "faster", "stt"]
 categories = ["science", "api-bindings"]
 
 [dependencies]
+derive_builder = "0.20.0"
 pyo3 = {version="0.21.2", features=["auto-initialize"]}
