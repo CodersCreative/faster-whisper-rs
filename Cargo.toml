@@ -12,5 +12,9 @@ keywords = ["speech_to_text", "open-ai", "whisper", "faster", "stt"]
 categories = ["science", "api-bindings"]
 
 [dependencies]
+ct2rs = { version = "0.9.7", features = ["whisper"] }
 derive_builder = "0.20.0"
 pyo3 = {version="0.21.2", features=["auto-initialize"]}
+reqwest = "0.12.22"
+symphonia = {version = "0.5.3", features=["mp3"]}
+tokio = { version = "1.46.1", features = ["full"] }
