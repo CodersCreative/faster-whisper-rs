@@ -14,13 +14,46 @@ const REQUIRED_FILES: [&str; 5] = [
     "tokenizer.json",
 ];
 
+#[derive(Default, Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub struct ModelHandlerBuilder {
+    pub model_name: Option<String>,  // list of downloaded models
+    pub models_dir: Option<PathBuf>, // path to the models directory
+}
+
+impl ModelHandlerBuilder {
+    pub fn models_dir(&mut self, models_dir: PathBuf) -> &mut Self {
+        self.models_dir = Some(models_dir);
+        self
+    }
+
+    pub fn model_name(&mut self, model_name: String) -> &mut Self {
+        self.model_name = Some(model_name);
+        self
+    }
+
+    pub async fn build(self) -> ModelHandler {
+        ModelHandler::new(
+            match self.model_name {
+                Some(x) => x.clone(),
+                None => String::from("base"),
+            },
+            match self.models_dir {
+                Some(x) => x,
+                None => PathBuf::from("models/"),
+            },
+        )
+        .await
+    }
+}
+
+#[derive(Default, Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ModelHandler {
-    model_name: String,  // list of downloaded models
-    models_dir: PathBuf, // path to the models directory
+    pub model_name: String,  // list of downloaded models
+    pub models_dir: PathBuf, // path to the models directory
 }
 
 impl ModelHandler {
-    pub async fn new(model_name: &str, models_dir: PathBuf) -> ModelHandler {
+    pub async fn new(model_name: String, models_dir: PathBuf) -> ModelHandler {
         let model_handler = ModelHandler {
             model_name: match models().get(&model_name.to_lowercase()) {
                 Some(x) => x.to_string(),
